@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <cstddef>
 #include <algorithm>
+#include <exception>
 
 
 template <class T, class U>
@@ -16,7 +17,9 @@ private:
     void siftUp(const std::size_t pos);
     void siftDown(const std::size_t pos);
 public:
-    PriorityQueue(/* args */);
+    PriorityQueue();
+    PriorityQueue(const std::vector<T> handles, 
+                  const std::vector<U> elements);
     ~PriorityQueue();
 
     void insert(const T newItem, const U key);
@@ -29,8 +32,31 @@ public:
 };
 
 template <class T, class U>
-PriorityQueue<T, U>::PriorityQueue(/* args */)
+PriorityQueue<T, U>::PriorityQueue()
 {
+    size = 0;
+}
+
+template <class T, class U>
+PriorityQueue<T, U>::PriorityQueue(const std::vector<T> handles, 
+                                   const std::vector<U> elements)
+{
+    if (handles.size() != elements.size())
+    {
+        throw std::runtime_error("Sizes do not coincide. Abort.");
+    }
+    heap = elements;
+    addressArray = handles;
+    size = addressArray.size();
+    for (std::size_t i=0; i<size; ++i)
+    {
+        addressMap[addressArray[i]] = i;
+    }
+
+    for (std::size_t i=size/2; i>=0; --i)
+    {
+        siftDown(i);
+    }
 }
 
 template <class T, class U>
