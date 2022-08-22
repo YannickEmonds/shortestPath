@@ -25,8 +25,26 @@ std::pair<std::vector<float>, std::vector<NodeID>> dijkstra_sp(const Graph graph
     while (not pq.isEmpty())
     {
         NodeID u = pq.deleteMin();
-        // iterate over edges from u 
-        // --> in class Graph, implement iterator over edges
+        const auto edgeIterators = graph.getEdgesForNode(u);
+        for (auto it = edgeIterators.first, end = edgeIterators.second; it != end; ++it)
+        {
+            const NodeID edgeID = it->first;
+            const float cost = it->second;
+            // relax edges
+            if (distances[u] + cost < distances[edgeID])
+            {
+                distances[edgeID] = distances[u] + cost;
+                parent[edgeID] = u;
+                if (pq.contains(edgeID))
+                {
+                    pq.decreaseKey(edgeID, distances[edgeID]);
+                }
+                else
+                {
+                    pq.insert(edgeID, distances[edgeID]);
+                }
+            }
+        }
     }
 
     return std::make_pair(distances, parent);

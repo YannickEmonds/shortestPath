@@ -9,8 +9,9 @@ public:
 
     void insert(const T newItem, const U key);
     T deleteMin();
-    void decreaseKey(T element, const U newKey);
+    void decreaseKey(const T element, const U newKey);
     bool isEmpty() const;
+    bool contains(const T element) const;
 };
 
 
