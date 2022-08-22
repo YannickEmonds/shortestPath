@@ -33,7 +33,7 @@ public:
     Graph(const EdgeList list);
     Graph(const NodeArray nodes, const EdgeArray edges);
 
-    std::pair<EdgeArray::const_iterator, EdgeArray::const_iterator> getEdgesForNode(NodeID id) const;
+    std::pair<EdgeArray::const_iterator, EdgeArray::const_iterator> getEdgesOfNode(NodeID id) const;
     
     std::size_t size() const;
     std::size_t nEdges() const;

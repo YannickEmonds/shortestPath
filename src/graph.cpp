@@ -4,7 +4,8 @@
 // TODO
 Graph::Graph()
 {
-
+    numberOfNodes = 0;
+    numberOfEdges = 0;
 }
 
 
@@ -23,7 +24,7 @@ Graph::Graph(const NodeArray nodes, const EdgeArray edges)
 }
 
 
-std::pair<EdgeArray::const_iterator, EdgeArray::const_iterator> Graph::getEdgesForNode(NodeID id) const
+std::pair<EdgeArray::const_iterator, EdgeArray::const_iterator> Graph::getEdgesOfNode(NodeID id) const
 {
     EdgeArray::const_iterator begin = edges.begin() + nodes[id];
     EdgeArray::const_iterator end = edges.begin() + nodes[id+1];

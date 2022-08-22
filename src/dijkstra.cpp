@@ -11,10 +11,10 @@
 // Outputs: distances to starting node (vector)
 //          parent nodes (vector)
 std::pair<std::vector<float>, std::vector<NodeID>> dijkstra_sp(const Graph graph,
-                                                                const NodeID startID)
+                                                               const NodeID startID)
 {
     std::vector<float> distances(graph.size(), std::numeric_limits<float>::infinity());
-    std::vector<NodeID> parent(graph.size(), std::numeric_limits<float>::quiet_NaN());
+    std::vector<NodeID> parent(graph.size(), std::numeric_limits<float>::quiet_NaN());  // fixme
     PriorityQueue<NodeID, float> pq;
 
     distances[startID] = 0.0f;
@@ -24,7 +24,7 @@ std::pair<std::vector<float>, std::vector<NodeID>> dijkstra_sp(const Graph graph
     while (not pq.isEmpty())
     {
         NodeID u = pq.deleteMin();
-        const auto edgeIterators = graph.getEdgesForNode(u);
+        const auto edgeIterators = graph.getEdgesOfNode(u);
         for (auto it = edgeIterators.first, end = edgeIterators.second; it != end; ++it)
         {
             const NodeID edgeID = it->first;

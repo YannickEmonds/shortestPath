@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <unordered_map>
 #include <cstddef>
@@ -28,7 +30,7 @@ public:
     void decreaseKey(const T element, const U newKey);
     bool isEmpty() const;
     bool contains(const T element) const;
-    std::size_t size() const;
+    std::size_t PQsize() const;
 };
 
 template <class T, class U>
@@ -150,7 +152,13 @@ bool PriorityQueue<T, U>::isEmpty() const
 }
 
 template <class T, class U>
-std::size_t PriorityQueue<T, U>::size() const
+bool PriorityQueue<T, U>::contains(const T handle) const
+{
+    return addressMap.contains(handle);
+}
+
+template <class T, class U>
+std::size_t PriorityQueue<T, U>::PQsize() const
 {
     return size;
 }
