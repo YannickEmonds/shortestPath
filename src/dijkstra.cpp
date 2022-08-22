@@ -4,7 +4,6 @@
 #include "graph.h"
 #include "priority_queue.h"
 
-using NodeID = std::size_t;
 
 // Implementation of Dijkstra's algorithm (naive version).
 // Inputs: Graph containing nodes and weights edges
